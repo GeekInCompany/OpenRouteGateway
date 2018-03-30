@@ -1,0 +1,258 @@
+{
+  "properties": {
+    "distances": {
+      "description": "[Distance matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
+      "items": {
+        "type": "number",
+        "format": "double"
+      },
+      "example": [
+        [
+          2366119,
+          2338412.25,
+          0,
+          7519754
+        ],
+        [
+          9983969,
+          9956262,
+          7509508.5,
+          0
+        ]
+      ]
+    },
+    "durations": {
+      "description": "[Duration matrix](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#matrix-response) where the items(rows) correspond to the number of `sources` and the entries(columns) of each item correspond to the number of `destinations`.\n",
+      "items": {
+        "type": "number",
+        "format": "double"
+      },
+      "example": [
+        [
+          88632.73,
+          87838.93,
+          0,
+          311791.09
+        ],
+        [
+          399967.72,
+          399173.91,
+          310735.56,
+          0
+        ]
+      ]
+    },
+    "destinations": {
+      "description": "Array of destinations. Each point is snapped to the road and path network",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "description": "`{longitude},{latitude}` coordinates of the closest accessible point on the routing graph.\n",
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double",
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "name": {
+            "description": "Name of the street the closest accessible point is situated on. Only for `resolve_locations=true` and only if name is available.\n",
+            "type": "string"
+          },
+          "snapped_distance": {
+            "description": "Distance between the `source`/`destination` Location and the used point on the routing graph.\n",
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "example": [
+        {
+          "location": [
+            37.572926,
+            55.80129
+          ],
+          "snapped_distance": 19.8
+        },
+        {
+          "location": [
+            115.658655,
+            38.116731
+          ],
+          "snapped_distance": 1225.53
+        }
+      ]
+    },
+    "sources": {
+      "description": "Array of sources. Each point is snapped to the road and path network",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "location": {
+            "description": "`{longitude},{latitude}` coordinates of the closest accessible point on the routing graph.\n",
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double",
+              "minItems": 2,
+              "maxItems": 2
+            }
+          },
+          "name": {
+            "description": "Name of the street the closest accessible point is situated on. Only for `resolve_locations=true` and only if name is available.\n",
+            "type": "string"
+          },
+          "snapped_distance": {
+            "description": "Distance between the `source`/`destination` Location and the used point on the routing graph.\n",
+            "type": "number",
+            "format": "double"
+          }
+        }
+      },
+      "example": [
+        {
+          "location": [
+            9.968501,
+            48.47789
+          ],
+          "snapped_distance": 126.17
+        },
+        {
+          "location": [
+            9.207773,
+            49.153882
+          ],
+          "snapped_distance": 10.54
+        },
+        {
+          "location": [
+            37.572926,
+            55.80129
+          ],
+          "snapped_distance": 19.8
+        },
+        {
+          "location": [
+            115.658655,
+            38.116731
+          ],
+          "snapped_distance": 1225.53
+        }
+      ]
+    },
+    "info": {
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "API endpoint used.",
+          "example": "matrix"
+        },
+        "engine": {
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "Backend version used for the request.",
+              "example": "4.2.0"
+            },
+            "build_date": {
+              "type": "string",
+              "description": "Build date of the used backend version",
+              "example": "2017-09-08T09:21:35Z"
+            }
+          },
+          "title": "Engine Information"
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Attribution for using our service.",
+          "example": "openrouteservice.org, OpenStreetMap contributors"
+        },
+        "osm_file_md5_hash": {
+          "type": "string",
+          "description": "md5 hash of the planet file which the graphs were built from.",
+          "example": "bbff3c042b19c04e3efdd9722e22db5f"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix timestamp of the precise request date.",
+          "example": 1493306341299
+        },
+        "query": {
+          "properties": {
+            "profile": {
+              "type": "string",
+              "example": "driving-car"
+            },
+            "locations": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "maxItems": 2,
+                "minItems": 2
+              },
+              "minItems": 2,
+              "maxItems": 200,
+              "example": [
+                [
+                  9.970093,
+                  48.477473
+                ],
+                [
+                  9.207916,
+                  49.153868
+                ],
+                [
+                  37.573242,
+                  55.801281
+                ],
+                [
+                  115.663757,
+                  38.106467
+                ]
+              ]
+            },
+            "sources": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": "2,3"
+            },
+            "destinations": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": "all"
+            },
+            "metrics": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "example": "distance|duration|weight"
+            },
+            "optimized": {
+              "type": "boolean",
+              "example": true
+            }
+          },
+          "title": "query object",
+          "description": "Summarizes your query settings."
+        }
+      },
+      "title": "info object"
+    }
+  },
+  "title": "Matrix Response Object",
+  "description": "The Matrix Response contains one matrix for each specified `metrics` value.\n"
+}

@@ -1,0 +1,13 @@
+{
+"properties": {
+        
+  "address": "Berliner Straße 45",
+  "neighbourhood":"",
+  "borough":"",
+  "locality": "Heidelberg",
+  "county": "",
+  "region": "",
+  "postalcode": "69120",
+  "country": "Germany"
+}
+}

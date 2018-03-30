@@ -1,0 +1,212 @@
+{
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "default": "FeatureCollection",
+      "example": "FeatureCollection"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "default": "Feature"
+          },
+          "geometry": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "default": "Point"
+              },
+              "coordinates": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "maxItems": 2,
+                "minItems": 2
+              }
+            },
+            "title": "geometry object"
+          },
+          "properties": {
+            "properties": {
+              "osm_id": {
+                "type": "string"
+              },
+              "category": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              },
+              "address": {
+                "type": "string"
+              },
+              "phone": {
+                "type": "string"
+              },
+              "website": {
+                "type": "string"
+              },
+              "opening_hours": {
+                "type": "string"
+              },
+              "wheelchair": {
+                "type": "string"
+              },
+              "distance": {
+                "type": "string"
+              }
+            },
+            "title": "properties object"
+          }
+        },
+        "title": "features object"
+      },
+      "example": [
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              8.1691,
+              47.444286
+            ]
+          },
+          "properties": {
+            "osm_id": "4491251090",
+            "category": "451",
+            "name": "Volg",
+            "distance": "115.08"
+          }
+        },
+        {
+          "type": "Feature",
+          "geometry": {
+            "type": "Point",
+            "coordinates": [
+              8.168594,
+              47.380072
+            ]
+          },
+          "properties": {
+            "osm_id": "2754058215",
+            "category": "474",
+            "name": "Berner Früchte und Gemüse",
+            "phone": "+41 (0)62 891 34 50/51",
+            "website": "http://www.berner-gemuese.ch",
+            "distance": "76.58"
+          }
+        }
+      ]
+    },
+    "bbox": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "description": "Contains the minimum bounding box of all features.",
+      "example": [
+        8.168594,
+        47.380072,
+        8.1691,
+        47.444286
+      ]
+    },
+    "info": {
+      "properties": {
+        "service": {
+          "type": "string",
+          "description": "API endpoint used.",
+          "example": "places"
+        },
+        "engine": {
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "Backend version used for the request.",
+              "example": "4.2.0"
+            },
+            "build_date": {
+              "type": "string",
+              "description": "Build date of the used backend version",
+              "example": "2017-09-08T09:21:35Z"
+            }
+          },
+          "title": "Engine Information"
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Attribution for using our service.",
+          "example": "openrouteservice.org, OpenStreetMap contributors"
+        },
+        "osm_file_md5_hash": {
+          "type": "string",
+          "description": "md5 hash of the planet file which the graphs were built from.",
+          "example": "bbff3c042b19c04e3efdd9722e22db5f"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix timestamp of the precise request date.",
+          "example": 1493306341299
+        },
+        "query": {
+          "properties": {
+            "filter": {
+              "properties": {
+                "category_group_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 560
+                  }
+                },
+                "catoegory_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "integer",
+                    "format": "int64",
+                    "example": 561
+                  }
+                }
+              },
+              "title": "filter object",
+              "description": "Filter the results by `category_group_ids` or `category_ids`. If both are specified the *group_ids* take priority."
+            },
+            "radius": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "limit": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "description": "Summarizes your query settings.",
+          "title": "query object",
+          "example": {
+            "filter": {
+              "category_group_ids": [
+                420
+              ]
+            },
+            "radius": 500,
+            "limit": 20
+          }
+        }
+      },
+      "title": "info object"
+    }
+  },
+  "title": "Places Poi Response Object"
+}
