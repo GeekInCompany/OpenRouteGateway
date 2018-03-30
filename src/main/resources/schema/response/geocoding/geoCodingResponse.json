@@ -1,0 +1,203 @@
+{
+  "properties": {
+    "type": {
+      "type": "string",
+      "default": "FeatureCollection",
+      "example": "FeatureCollection"
+    },
+    "features": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "type": {
+            "type": "string",
+            "default": "Feature",
+            "example": "Feature"
+          },
+          "geometry": {
+            "properties": {
+              "type": {
+                "type": "string",
+                "default": "Point",
+                "example": "Point"
+              },
+              "coordinates": {
+                "description": "Contains the longitude and latitude",
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "maxItems": 2,
+                "minItems": 2,
+                "example": [
+                  13.414369,
+                  52.516116
+                ]
+              }
+            },
+            "title": "geometry object"
+          },
+          "properties": {
+            "properties": {
+              "country": {
+                "type": "string",
+                "example": "Germany"
+              },
+              "country_code": {
+                "type": "string",
+                "example": "DE"
+              },
+              "region": {
+                "type": "string",
+                "example": "Berlin"
+              },
+              "locality": {
+                "type": "string",
+                "example": "Berlin"
+              },
+              "county": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string",
+                "example": "Berlin"
+              },
+              "city": {
+                "type": "string",
+                "example": "Berlin"
+              },
+              "postal_code": {
+                "type": "string",
+                "example": 10179
+              },
+              "borough": {
+                "type": "string",
+                "example": "Mitte"
+              },
+              "neighbourhood": {
+                "type": "string",
+                "example": "Mitte"
+              },
+              "street": {
+                "type": "string",
+                "example": "Waisenstraße"
+              },
+              "house_number": {
+                "type": "string",
+                "example": 3
+              },
+              "name": {
+                "type": "string",
+                "example": "Waisenstraße 3"
+              },
+              "place_type": {
+                "type": "string",
+                "description": "[Type](https://github.com/GIScience/openrouteservice-docs/blob/master/README.md#place-type) of the returned location.\n",
+                "example": "address"
+              },
+              "distance": {
+                "type": "string",
+                "description": "Distance between the input location and the result point.",
+                "example": 12.41
+              },
+              "confidence": {
+                "type": "string",
+                "description": "Value range: `0-1`\n**For reverse geocoding:** Based on the distance. The closer a result is to the queried point, the higher the `confidence`.\n**For normal geocoding:**  Based on the comparison of the query and the result. The closer a result is to the query, the higher the `confidence`.\n",
+                "example": 0.8
+              }
+            },
+            "title": "porperties object",
+            "description": "Contains the OSM tag information of the point and the `confidence`. For reverse request with `distance`."
+          }
+        },
+        "title": "features object"
+      }
+    },
+    "bbox": {
+      "type": "array",
+      "description": "Contains the minimum bounding box of all features.",
+      "items": {
+        "type": "number",
+        "format": "double"
+      },
+      "maxItems": 4,
+      "minItems": 4,
+      "example": [
+        13.239515,
+        52.514679,
+        13.239515,
+        52.514679
+      ]
+    },
+    "info": {
+      "properties": {
+        "service": {
+          "type": "string",
+          "default": "geocoding",
+          "example": "geocoding",
+          "description": "API endpoint used."
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Attribution for using our service.",
+          "example": "openrouteservice.org, OpenStreetMap contributors"
+        },
+        "osm_file_md5_hash": {
+          "type": "string",
+          "description": "md5 hash of the planet file which the graphs were built from.",
+          "example": "bbff3c042b19c04e3efdd9722e22db5f"
+        },
+        "query": {
+          "properties": {
+            "query": {
+              "type": "string"
+            },
+            "location": {
+              "type": "array",
+              "items": {
+                "type": "number",
+                "format": "double"
+              },
+              "example": [
+                13.239515,
+                52.514679
+              ]
+            },
+            "limit": {
+              "type": "integer",
+              "format": "int64",
+              "default": 20,
+              "example": 20
+            }
+          },
+          "title": "query object",
+          "description": "Summarizes your query settings."
+        },
+        "engine": {
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "Backend version used for the request.",
+              "example": "4.2.0"
+            },
+            "build_date": {
+              "type": "string",
+              "description": "Build date of the used backend version",
+              "example": "2017-09-08T09:21:35Z"
+            }
+          },
+          "title": "Engine Information"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix timestamp of the precise request date.",
+          "example": 149328812434312341234
+        }
+      },
+      "title": "info object"
+    }
+  },
+  "title": "Geocode Response Object"
+}

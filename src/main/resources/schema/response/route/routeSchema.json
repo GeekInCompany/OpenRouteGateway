@@ -1,0 +1,772 @@
+{
+  "properties": {
+    "routes": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "summary": {
+            "properties": {
+              "distance": {
+                "type": "number",
+                "format": "double",
+                "description": "Total route distance in specified units.",
+                "example": 5757.4
+              },
+              "duration": {
+                "type": "number",
+                "format": "double",
+                "description": "Total duration in seconds.",
+                "example": 821
+              },
+              "ascent": {
+                "type": "number",
+                "format": "double",
+                "description": "Total ascent in meters.",
+                "example": 257
+              },
+              "descent": {
+                "type": "number",
+                "format": "double",
+                "description": "Total descent in meters.",
+                "example": 336
+              },
+              "avgspeed": {
+                "type": "number",
+                "format": "double",
+                "description": "Total average speed in km/h"
+              }
+            },
+            "title": "summary object",
+            "description": "Contains total sums of duration, route distance and actual distance of the route."
+          },
+          "geometry_format": {
+            "type": "string",
+            "description": "Contains the defined geometry format.",
+            "default": "encodedpolyline",
+            "example": "encodedpolyline"
+          },
+          "geometry": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "coordinates": {
+                "type": "array",
+                "description": "Contains the coordinate arrays of every route point.",
+                "items": {
+                  "type": "array",
+                  "description": "Contains longitude, latitude and altitude(for elevation=true).",
+                  "minItems": 2,
+                  "maxItems": 3,
+                  "items": {
+                    "type": "number",
+                    "format": "double"
+                  }
+                }
+              }
+            },
+            "description": "Contains the geometry in the defined geometry format.",
+            "example": "mtkeHuv|q@~@VLHz@\\PR|@hBt@j@^n@L\\NjALv@Jh@NXi@zBm@jCKTy@z@qAhBa@\\[Ne@DgCc@i@?[Ty@hAi@zASRi@R}@H_@N[b@kAdCy@`Au@d@eA|@q@h@WRe@PYHYBqADgAAcAL_A^w@~@q@`@w@Zw@Cm@K[PeA|Aa@p@g@fAiAhBuAv@]VU^k@xAUXe@TqATy@V}@f@_@V[MUWqA_FKy@Me@_@cAu@{Ae@c@aAfBaAv@g@rBm@|@w@x@m@^U@m@Ma@SI\\mAlEkAjC_AjC_ApCe@z@i@j@q@f@[NsAp@u@T}A\\wATU?WCeBm@q@MwAGUCg@SMaAi@mDQm@K}@Mq@u@mAc@i@c@Ys@[WW_@q@e@a@cA_@w@E{BHmBXqBkBsA}@{Ao@iAB{@QYSi@qCUy@Ee@i@kBWk@yAoCWS_@SaAE{@yAu@mDUsAqA}@EM@QTiA|@iAn@gAd@eAg@_@I]??k@i@yBkEa@}@W}@WkCUqC?_@Hg@ZqABg@Gm@YoAEgAMq@@jAB|CC`@{@rACH"
+          },
+          "segments": {
+            "type": "array",
+            "description": "List containing the segments and its correspoding steps which make up the route.",
+            "items": {
+              "properties": {
+                "distance": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Contains the distance of the segment in specified units.",
+                  "example": 5757.4
+                },
+                "duration": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Contains the duration of the segment in seconds.",
+                  "example": 821
+                },
+                "ascent": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Contains ascent of this segment in meters for `elevation=true`."
+                },
+                "descent": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Contains descent of this segment in meters for `elevation=true`."
+                },
+                "detourfactor": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Contains the deviation compared to a straight line that would have the factor `1`. Double the Distance would be a `2`."
+                },
+                "percentage": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Contains the proportion of the route in percent."
+                },
+                "avgspeed": {
+                  "type": "number",
+                  "format": "double",
+                  "description": "Contains the average speed of this segment in km/h."
+                },
+                "steps": {
+                  "type": "array",
+                  "description": "List containing the specific steps the segment consists of.",
+                  "items": {
+                    "properties": {
+                      "distance": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "The distance for the step in meters."
+                      },
+                      "duration": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "The duration for the step in seconds."
+                      },
+                      "type": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "The [instruction](https://github.com/GIScience/openrouteservice-docs#instruction-types) action for symbolisation purposes."
+                      },
+                      "instruction": {
+                        "type": "string",
+                        "description": "The routing instruction text for the step."
+                      },
+                      "name": {
+                        "type": "string",
+                        "description": "The name of the next street."
+                      },
+                      "maneuver": {
+                        "title": "maneuver object",
+                        "properties": {
+                          "bearing_before": {
+                            "type": "number",
+                            "format": "int64",
+                            "description": "The azimuth angle (in degrees) of the direction right before the maneuver."
+                          },
+                          "bearing_after": {
+                            "type": "number",
+                            "format": "int64",
+                            "description": "The azimuth angle (in degrees) of the direction right after the maneuver."
+                          },
+                          "location": {
+                            "type": "array",
+                            "description": "The coordinate of the point where a maneuver takes place.",
+                            "items": {
+                              "type": "number",
+                              "format": "double"
+                            },
+                            "maxItems": 2,
+                            "minItems": 2
+                          }
+                        }
+                      },
+                      "way_points": {
+                        "type": "array",
+                        "description": "List containing the indices of the steps start- and endpoint corresponding to the *geometry*.",
+                        "items": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
+                      },
+                      "exit_number": {
+                        "type": "integer",
+                        "format": "int64",
+                        "description": "Only for roundabouts. Contains the number of the exit to take."
+                      },
+                      "exit_bearings": {
+                        "type": "array",
+                        "description": "Contains the bearing of the entrance and all passed exits in a roundabout for `roundabout_exits=true`.",
+                        "items": {
+                          "type": "integer",
+                          "format": "int64"
+                        },
+                        "minItems": 2
+                      }
+                    },
+                    "title": "steps object",
+                    "example": [
+                      {
+                        "distance": 383.1,
+                        "duration": 46,
+                        "type": "6",
+                        "instruction": "Head south on Benatweg",
+                        "way_points": [
+                          0,
+                          12
+                        ]
+                      },
+                      {
+                        "distance": 757.4,
+                        "duration": 54.5,
+                        "type": "1",
+                        "instruction": "Turn right onto Hölzle, K 5528",
+                        "way_points": [
+                          12,
+                          33
+                        ]
+                      },
+                      {
+                        "distance": 980.2,
+                        "duration": 70.6,
+                        "type": "6",
+                        "instruction": "Continue straight onto Sulzbacher Straße, K 5528",
+                        "way_points": [
+                          33,
+                          63
+                        ]
+                      },
+                      {
+                        "distance": 3636.7,
+                        "duration": 649.9,
+                        "type": "5",
+                        "instruction": "Turn slight right",
+                        "way_points": [
+                          63,
+                          163
+                        ]
+                      }
+                    ]
+                  }
+                }
+              },
+              "title": "segments object",
+              "example": {
+                "distance": 5757.4,
+                "duration": 821,
+                "steps": [
+                  {
+                    "distance": 383.1,
+                    "duration": 46,
+                    "type": "6",
+                    "instruction": "Head south on Benatweg",
+                    "way_points": [
+                      0,
+                      12
+                    ]
+                  },
+                  {
+                    "distance": 757.4,
+                    "duration": 54.5,
+                    "type": "1",
+                    "instruction": "Turn right onto Hölzle, K 5528",
+                    "way_points": [
+                      12,
+                      33
+                    ]
+                  },
+                  {
+                    "distance": 980.2,
+                    "duration": 70.6,
+                    "type": "6",
+                    "instruction": "Continue straight onto Sulzbacher Straße, K 5528",
+                    "way_points": [
+                      33,
+                      63
+                    ]
+                  },
+                  {
+                    "distance": 3636.7,
+                    "duration": 649.9,
+                    "type": "5",
+                    "instruction": "Turn slight right",
+                    "way_points": [
+                      63,
+                      163
+                    ]
+                  }
+                ]
+              }
+            },
+            "maxItems": 1
+          },
+          "way_points": {
+            "type": "array",
+            "description": "List containing the indices of way points corresponding to the *geometry*.",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            },
+            "maxItems": 2,
+            "minItems": 2,
+            "example": [
+              0,
+              163
+            ]
+          },
+          "extras": {
+            "description": "For every information item there is an associated block divided into *summary* and *values*.",
+            "properties": {
+              "steepness": {
+                "properties": {
+                  "values": {
+                    "description": "Broken down by way_points.",
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Value 1: Indice of the starting geometry for this section.\n\nValue 2: Indice of the end geometry for this section.\n\nValue 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.\n"
+                      }
+                    }
+                  },
+                  "summary": {
+                    "description": "Broken down by information category values.",
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
+                        },
+                        "distance": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Cumulative distance of this value."
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Category percentage of the entire route."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "suitability": {
+                "properties": {
+                  "values": {
+                    "description": "Broken down by way_points.",
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Value 1: Indice of the starting geometry for this section.\n\nValue 2: Indice of the end geometry for this section.\n\nValue 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.\n"
+                      }
+                    }
+                  },
+                  "summary": {
+                    "description": "Broken down by information category values.",
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
+                        },
+                        "distance": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Cumulative distance of this value."
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Category percentage of the entire route."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "surface": {
+                "properties": {
+                  "values": {
+                    "description": "Broken down by way_points.",
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Value 1: Indice of the starting geometry for this section.\n\nValue 2: Indice of the end geometry for this section.\n\nValue 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.\n"
+                      }
+                    }
+                  },
+                  "summary": {
+                    "description": "Broken down by information category values.",
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
+                        },
+                        "distance": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Cumulative distance of this value."
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Category percentage of the entire route."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "waycategory": {
+                "properties": {
+                  "values": {
+                    "description": "Broken down by way_points.",
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Value 1: Indice of the starting geometry for this section.\n\nValue 2: Indice of the end geometry for this section.\n\nValue 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.\n"
+                      }
+                    }
+                  },
+                  "summary": {
+                    "description": "Broken down by information category values.",
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
+                        },
+                        "distance": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Cumulative distance of this value."
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Category percentage of the entire route."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "waytype": {
+                "properties": {
+                  "values": {
+                    "description": "Broken down by way_points.",
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Value 1: Indice of the starting geometry for this section.\n\nValue 2: Indice of the end geometry for this section.\n\nValue 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.\n"
+                      }
+                    }
+                  },
+                  "summary": {
+                    "description": "Broken down by information category values.",
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
+                        },
+                        "distance": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Cumulative distance of this value."
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Category percentage of the entire route."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "tollways": {
+                "properties": {
+                  "values": {
+                    "description": "Broken down by way_points.",
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Value 1: Indice of the starting geometry for this section.\n\nValue 2: Indice of the end geometry for this section.\n\nValue 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.\n"
+                      }
+                    }
+                  },
+                  "summary": {
+                    "description": "Broken down by information category values.",
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
+                        },
+                        "distance": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Cumulative distance of this value."
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Category percentage of the entire route."
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "traildifficulty": {
+                "properties": {
+                  "values": {
+                    "description": "Broken down by way_points.",
+                    "type": "array",
+                    "items": {
+                      "type": "array",
+                      "items": {
+                        "type": "number",
+                        "format": "double",
+                        "description": "Value 1: Indice of the starting geometry for this section.\n\nValue 2: Indice of the end geometry for this section.\n\nValue 3: [Value](https://github.com/GIScience/openrouteservice-docs#routing-response) assigned to this section.\n"
+                      }
+                    }
+                  },
+                  "summary": {
+                    "description": "Broken down by information category values.",
+                    "type": "array",
+                    "items": {
+                      "properties": {
+                        "value": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "[Value](https://github.com/GIScience/openrouteservice-docs#routing-response) of a info category."
+                        },
+                        "distance": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Cumulative distance of this value."
+                        },
+                        "amount": {
+                          "type": "integer",
+                          "format": "int64",
+                          "description": "Category percentage of the entire route."
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "bbox": {
+            "type": "array",
+            "description": "Contains the minimum bounding box of the route.",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "maxItems": 4,
+            "minItems": 4,
+            "example": [
+              8.327707,
+              48.231946,
+              8.345244,
+              48.263552
+            ]
+          }
+        },
+        "title": "routes object",
+        "example": {
+          "summary": {
+            "distance": 5757.4,
+            "duration": 821,
+            "ascent": 257,
+            "descent": 336
+          },
+          "geometry_format": "encodedpolyline",
+          "geometry": "mtkeHuv|q@~@VLHz@\\PR|@hBt@j@^n@L\\NjALv@Jh@NXi@zBm@jCKTy@z@qAhBa@\\[Ne@DgCc@i@?[Ty@hAi@zASRi@R}@H_@N[b@kAdCy@`Au@d@eA|@q@h@WRe@PYHYBqADgAAcAL_A^w@~@q@`@w@Zw@Cm@K[PeA|Aa@p@g@fAiAhBuAv@]VU^k@xAUXe@TqATy@V}@f@_@V[MUWqA_FKy@Me@_@cAu@{Ae@c@aAfBaAv@g@rBm@|@w@x@m@^U@m@Ma@SI\\mAlEkAjC_AjC_ApCe@z@i@j@q@f@[NsAp@u@T}A\\wATU?WCeBm@q@MwAGUCg@SMaAi@mDQm@K}@Mq@u@mAc@i@c@Ys@[WW_@q@e@a@cA_@w@E{BHmBXqBkBsA}@{Ao@iAB{@QYSi@qCUy@Ee@i@kBWk@yAoCWS_@SaAE{@yAu@mDUsAqA}@EM@QTiA|@iAn@gAd@eAg@_@I]??k@i@yBkEa@}@W}@WkCUqC?_@Hg@ZqABg@Gm@YoAEgAMq@@jAB|CC`@{@rACH",
+          "segments": {
+            "distance": 5757.4,
+            "duration": 821,
+            "steps": [
+              {
+                "distance": 383.1,
+                "duration": 46,
+                "type": "6",
+                "instruction": "Head south on Benatweg",
+                "way_points": [
+                  0,
+                  12
+                ]
+              },
+              {
+                "distance": 757.4,
+                "duration": 54.5,
+                "type": "1",
+                "instruction": "Turn right onto Hölzle, K 5528",
+                "way_points": [
+                  12,
+                  33
+                ]
+              },
+              {
+                "distance": 980.2,
+                "duration": 70.6,
+                "type": "6",
+                "instruction": "Continue straight onto Sulzbacher Straße, K 5528",
+                "way_points": [
+                  33,
+                  63
+                ]
+              },
+              {
+                "distance": 3636.7,
+                "duration": 649.9,
+                "type": "5",
+                "instruction": "Turn slight right",
+                "way_points": [
+                  63,
+                  163
+                ]
+              }
+            ]
+          }
+        }
+      }
+    },
+    "info": {
+      "properties": {
+        "engine": {
+          "properties": {
+            "version": {
+              "type": "string",
+              "description": "Backend version used for the request.",
+              "example": "4.2.0"
+            },
+            "build_date": {
+              "type": "string",
+              "description": "Build date of the used backend version",
+              "example": "2017-09-08T09:21:35Z"
+            }
+          },
+          "title": "Engine Information"
+        },
+        "attribution": {
+          "type": "string",
+          "description": "Attribution for using our service.",
+          "example": "openrouteservice.org, OpenStreetMap contributors, tmc - BASt"
+        },
+        "osm_file_md5_hash": {
+          "type": "string",
+          "description": "md5 hash of the planet file which the graphs were built from.",
+          "example": "bbff3c042b19c04e3efdd9722e22db5f"
+        },
+        "service": {
+          "type": "string",
+          "description": "API endpoint used.",
+          "example": "routing"
+        },
+        "timestamp": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix timestamp of the precise request date.",
+          "example": 1493300103526
+        },
+        "query": {
+          "required": [
+            "coordinates",
+            "geometry_format",
+            "profile"
+          ],
+          "properties": {
+            "profile": {
+              "type": "string",
+              "example": "driving-car"
+            },
+            "preference": {
+              "type": "string",
+              "default": "fastest",
+              "example": "fastest"
+            },
+            "coordinates": {
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "number",
+                  "format": "double"
+                },
+                "maxItems": 2,
+                "minItems": 2
+              },
+              "minItems": 2,
+              "example": [
+                [
+                  8.34234,
+                  48.23424
+                ],
+                [
+                  8.23424,
+                  48.26424
+                ]
+              ]
+            },
+            "language": {
+              "type": "string",
+              "example": "en"
+            },
+            "units": {
+              "type": "string",
+              "example": "meters"
+            },
+            "geometry": {
+              "type": "boolean",
+              "example": true
+            },
+            "geometry_format": {
+              "type": "string",
+              "example": "encodedpolyline"
+            },
+            "instructions_format": {
+              "type": "string",
+              "example": "text"
+            },
+            "instructions": {
+              "type": "boolean",
+              "example": true
+            },
+            "elevation": {
+              "type": "boolean",
+              "example": false
+            },
+            "options": {
+              "type": "string",
+              "example": {}
+            }
+          }
+        }
+      },
+      "title": "info object",
+      "description": "Summarizes your query settings."
+    }
+  },
+  "title": "Route Response Object"
+}
